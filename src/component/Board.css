@@ -1,0 +1,48 @@
+.Board {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Board .section {
+    padding: 10px;
+    border: 1px solid #ccc; /* 사각형 테두리 */
+    margin-bottom: 15px;
+    border-radius: 5px; /* 모서리를 살짝 둥글게 */
+}
+
+.Board .title {
+    text-align: center;
+    font-size: 24px;
+}
+
+.Board .board-content {
+    overflow-x: auto;
+}
+
+.Board .board-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.Board .board-table th, .board-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.Board .board-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.Board .SearchAndPage {
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: space-between;
+    margin-top: 20px; /* 상단 여백 */
+}
+
+.Board .SearchAndPage button {
+    margin-left: auto; /* 버튼을 오른쪽 끝으로 이동 */
+}
