@@ -1,39 +1,59 @@
 package com.fieldtraining.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "STUDENT")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
-    @Id
-    private Long id; // User의 ID를 재사용
+	@Id
+	private Long id;
 
-    private String name;
+	@Column(nullable = false)
+	private String name;
 
-    private String college;
+	@Column(nullable = false)
+	private String college;
 
-    private String department;
+	@Column(nullable = false)
+	private String department;
 
-    private String email;
+	@Column(nullable = false)
+	private int studentNumber;
 
-    private String phoneNumber;
+	@Column(nullable = false)
+	private String subject;
 
-    private String schoolName;
-    
-    private String subject;
+	@Column(nullable = false)
+	private String email;
 
-    private int studentNumber;
+	@Column(nullable = false)
+	private String phoneNumber;
 
-    @OneToOne
-    @MapsId // User의 ID를 기본 키로 매핑
-    @JoinColumn(name = "id") // 기본 키이자 외래 키로 사용
-    private User user;
+	@Column(nullable = false)
+	private String schoolName;
+
+	@OneToOne
+	@MapsId
+	@JoinColumn(name="id")
+	private User user;
+
+
+
 }
