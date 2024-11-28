@@ -2,7 +2,7 @@ package com.packt.fieldtraining.board.entity;
 
 import java.time.LocalDateTime;
 
-import com.packt.fieldtraining.common.entity.User;
+import com.packt.fieldtraining.data.entity.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

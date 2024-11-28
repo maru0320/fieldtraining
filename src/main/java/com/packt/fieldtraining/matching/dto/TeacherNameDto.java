@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MatchRequestDto {
+public class TeacherNameDto {
+    private Long id;
+    private String name;
 
-    private Long studentId;  // 학생 ID
-    private Long teacherId;  // 선생님 ID
+    // 생성자, getter, setter 생략
 }

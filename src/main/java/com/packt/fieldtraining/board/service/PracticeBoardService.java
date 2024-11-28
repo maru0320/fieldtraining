@@ -13,9 +13,9 @@ import com.packt.fieldtraining.board.dto.PracticeBoardResponseDto;
 import com.packt.fieldtraining.board.dto.SearchDto;
 import com.packt.fieldtraining.board.entity.PracticeBoard;
 import com.packt.fieldtraining.board.repository.PracticeBoardRepository;
-import com.packt.fieldtraining.common.entity.User;
-import com.packt.fieldtraining.common.repository.TeacherRepository;
-import com.packt.fieldtraining.common.repository.UserRepository;
+import com.packt.fieldtraining.data.entity.User;
+import com.packt.fieldtraining.data.repository.TeacherRepository;
+import com.packt.fieldtraining.data.repository.UserRepository;
 
 @Service
 @Transactional

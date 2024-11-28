@@ -14,5 +14,5 @@ public class MatchResponseDto {
 	private Long matchId;
 	private String studentName;
 	private String teacherName;
-	private boolean approved;
+	private boolean matchApproved;
 }

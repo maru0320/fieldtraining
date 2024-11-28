@@ -1,167 +1,134 @@
 package com.packt.fieldtraining.board.service;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.packt.fieldtraining.board.dto.PracticeBoardRequestDto;
-import com.packt.fieldtraining.board.dto.PracticeBoardResponseDto;
-import com.packt.fieldtraining.board.entity.PracticeBoard;
-import com.packt.fieldtraining.board.repository.PracticeBoardRepository;
-import com.packt.fieldtraining.common.entity.Student;
-import com.packt.fieldtraining.common.entity.Teacher;
-import com.packt.fieldtraining.common.entity.User;
-import com.packt.fieldtraining.common.repository.StudentRepository;
-import com.packt.fieldtraining.common.repository.TeacherRepository;
-import com.packt.fieldtraining.common.repository.UserRepository;
+import com.packt.fieldtraining.data.entity.Student;
+import com.packt.fieldtraining.data.entity.Teacher;
+import com.packt.fieldtraining.data.entity.User;
+import com.packt.fieldtraining.data.repository.StudentRepository;
+import com.packt.fieldtraining.data.repository.TeacherRepository;
+import com.packt.fieldtraining.data.repository.UserRepository;
 
 @SpringBootTest
-@Transactional(rollbackFor = Exception.class)
+@Transactional
 @TestPropertySource(locations = "classpath:application.properties")
 public class PracticeBoardTest {
 
-    @Autowired
-    private PracticeBoardService practiceBoardService;
+	 @Autowired
+	    private TeacherRepository teacherRepository;
 
-    @Autowired
-    private PracticeBoardRepository practiceBoardRepository;
+	    @Autowired
+	    private StudentRepository studentRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+	    @Autowired
+	    private UserRepository userRepository;
 
-    @Autowired
-    private StudentRepository studentRepository;
+	    @Test
+	    @Rollback(false) // 롤백 방지
+	    public void insertTestData() {
+	        // User 엔티티 삽입
+	        User user1 = new User();
+	        user1.setUserId("student01");
+	        user1.setPassword("password");
+	        user1.setRole("STUDENT");
+	        user1.setApproval(true);
 
-    @Autowired
-    private TeacherRepository teacherRepository;
+	        User user2 = new User();
+	        user2.setUserId("teacher02");
+	        user2.setPassword("password");
+	        user2.setRole("TEACHER");
+	        user2.setApproval(true);
+	        
+	        User user3 = new User();
+	        user3.setUserId("teacher03");
+	        user3.setPassword("password");
+	        user3.setRole("TEACHER");
+	        user3.setApproval(true);
+	        
+	        User user4 = new User();
+	        user4.setUserId("teacher04");
+	        user4.setPassword("password");
+	        user4.setRole("TEACHER");
+	        user4.setApproval(true);
+	        
+	        User user5 = new User();
+	        user5.setUserId("teacher05");
+	        user5.setPassword("password");
+	        user5.setRole("TEACHER");
+	        user5.setApproval(true);
 
-    @Test
-    @Rollback(false) // 롤백을 원치 않으면 false, 테스트가 끝나면 커밋
-    public void testCreate() {
-        try {
-            // Given: User(Student) 생성
-            User user = new User();
-            user.setUserId("jiji12");
-            user.setApproval(true);
-            user.setPassword("jijiji12");
-            user.setRole("STUDENT");
-            userRepository.save(user);
+	        // Student 엔티티 삽입
+	        Student student = new Student();
+	        student.setName("학생1");
+	        student.setCollege("대학교");
+	        student.setDepartment("컴퓨터학과");
+	        student.setStudentNumber(12345);
+	        student.setSubject("수학");
+	        student.setEmail("student1@university.com");
+	        student.setPhoneNumber("010-1234-5678");
+	        student.setSchoolName("대학교");
+	        student.setUser(user1);  // User와 연결
+	        user1.setStudentDetail(student);
+	        studentRepository.save(student);
+	        userRepository.save(user1);
 
-            Student student = new Student();
-            student.setName("최지원");
-            student.setCollege("배재대학교");
-            student.setDepartment("컴퓨터공학과");
-            student.setEmail("qwer122@naver.com");
-            student.setPhoneNumber("01045678151");
-            student.setSchoolName("도마초");
-            student.setStudentNumber(1234567);
-            student.setSubject("수학");
-            student.setUser(user);
-            user.setStudentDetail(student);
-            studentRepository.save(student);
+	        // Teacher 엔티티 삽입
+	        Teacher teacher = new Teacher();
+	        teacher.setName("박준");
+	        teacher.setSubject("수학");
+	        teacher.setEmail("teacher1@school.com");
+	        teacher.setPhoneNumber("010-9876-5432");
+	        teacher.setOfficeNumber("01012334789");
+	        teacher.setSchoolName("학교");
+	        teacher.setUser(user2);  // User와 연결
+	        user2.setTeacherDetail(teacher);
+	        teacherRepository.save(teacher);
+	        userRepository.save(user2);
+	        
+	        // Teacher 엔티티 삽입
+	        Teacher teacher2 = new Teacher();
+	        teacher2.setName("김마루");
+	        teacher2.setSubject("과학");
+	        teacher2.setEmail("teacher1@school.com");
+	        teacher2.setPhoneNumber("010-9876-5432");
+	        teacher2.setOfficeNumber("01012334789");
+	        teacher2.setSchoolName("학교");
+	        teacher2.setUser(user3);  // User와 연결
+	        user3.setTeacherDetail(teacher2);
+	        teacherRepository.save(teacher2);
+	        userRepository.save(user3);
+	        
+	        // Teacher 엔티티 삽입
+	        Teacher teacher3 = new Teacher();
+	        teacher3.setName("최지원");
+	        teacher3.setSubject("수학");
+	        teacher3.setEmail("teacher1@school.com");
+	        teacher3.setPhoneNumber("010-9876-5432");
+	        teacher3.setOfficeNumber("01012334789");
+	        teacher3.setSchoolName("학교");
+	        teacher3.setUser(user4);  // User와 연결
+	        user4.setTeacherDetail(teacher3);
+	        teacherRepository.save(teacher3);
+	        userRepository.save(user4);
+	        
+	        // Teacher 엔티티 삽입
+	        Teacher teacher4 = new Teacher();
+	        teacher4.setName("장경수");
+	        teacher4.setSubject("국어");
+	        teacher4.setEmail("teacher1@school.com");
+	        teacher4.setPhoneNumber("010-9876-5432");
+	        teacher4.setOfficeNumber("01012334789");
+	        teacher4.setSchoolName("학교");
+	        teacher4.setUser(user5);  // User와 연결
+	        user5.setTeacherDetail(teacher4);
+	        teacherRepository.save(teacher4);
+	        userRepository.save(user5);
 
-            // Given: 게시글 DTO 생성
-            PracticeBoardRequestDto boardDto = PracticeBoardRequestDto.builder()
-                    .writerID(user.getId())
-                    .title("테스트 게시글")
-                    .fileName("testfile.txt")
-                    .content("테스트 내용입니다.")
-                    .build();
-            
-            PracticeBoardRequestDto boardTest = PracticeBoardRequestDto.builder()
-                    .writerID(user.getId())
-                    .title("테스트 게시글2")
-                    .fileName("testfile2.txt")
-                    .content("테스트2 내용임")
-                    .build();
-            
-            PracticeBoardRequestDto boardTest3 = PracticeBoardRequestDto.builder()
-                    .writerID(user.getId())
-                    .title("테스트 게시글3")
-                    .fileName("testfile3.txt")
-                    .content("테스트3 내용임")
-                    .build();
-
-            // When: 게시글 생성
-            PracticeBoardResponseDto response = practiceBoardService.createBoard(boardDto);
-            PracticeBoardResponseDto response2 = practiceBoardService.createBoard(boardTest);
-            PracticeBoardResponseDto response3 = practiceBoardService.createBoard(boardTest3);
-
-            // Then: 결과 출력
-            System.out.println("Created Board: " + response);
-            System.out.println("Created Board: " + response2);
-            System.out.println("Created Board: " + response3);
-            
-            List<PracticeBoard> results = practiceBoardRepository.searchByKeyword("내용임");
-
-            results.forEach(board -> {
-                System.out.println("Title: " + board.getTitle());
-                System.out.println("Content: " + board.getContent());
-                System.out.println("Writer: " + board.getWriterName());
-            });
-
-            // 추가 데이터 확인
-            List<PracticeBoard> boards = practiceBoardRepository.findAll();
-            boards.forEach(board -> System.out.println("Board in DB: " + board));
-
-        } catch (Exception e) {
-            // 예외 발생 시 트랜잭션을 롤백하도록 처리
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            throw e; // 예외를 다시 던져서 테스트 실패로 처리
-        }
-    }
-
-    @Test
-    @Rollback(false) // 롤백을 원치 않으면 false, 테스트가 끝나면 커밋
-    public void testCreate2() {
-        try {
-            // Given: User(teacher) 생성
-            User user = new User();
-            user.setUserId("qwer123");
-            user.setApproval(true);
-            user.setPassword("qwer123");
-            user.setRole("TEACHER");
-            userRepository.save(user);
-
-            Teacher teacher = new Teacher();
-            teacher.setName("박준");
-            teacher.setEmail("park21@naver.com");
-            teacher.setPhoneNumber("01045679841");
-            teacher.setSchoolName("도마중");
-            teacher.setOfficeNumber("01085884564");
-            teacher.setSubject("과학");
-            teacher.setUser(user);
-            user.setTeacherDetail(teacher);
-            teacherRepository.save(teacher);
-
-            // Given: 게시글 DTO 생성
-            PracticeBoardRequestDto boardDto = PracticeBoardRequestDto.builder()
-                    .writerID(user.getId())
-                    .title("일기장입니다")
-                    .fileName("fileupload.txt")
-                    .content("본문은 무엇을 넣어야 할까요")
-                    .build();
-
-            // When: 게시글 생성
-            PracticeBoardResponseDto response = practiceBoardService.createBoard(boardDto);
-
-            // Then: 결과 출력
-            System.out.println("Created Board: " + response);
-
-            // 추가 데이터 확인
-            List<PracticeBoard> boards = practiceBoardRepository.findAll();
-            boards.forEach(board -> System.out.println("Board in DB: " + board));
-
-        } catch (Exception e) {
-            // 예외 발생 시 트랜잭션을 롤백하도록 처리
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            throw e; // 예외를 다시 던져서 테스트 실패로 처리
-        }
-    }
+	        System.out.println("데이터 삽입 완료!");
+	    }
 }
