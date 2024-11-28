@@ -1,0 +1,108 @@
+/* 기본 스타일 */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* 페이지 전체 컨테이너 */
+.teacher-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+.teacher-page h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #dddddd;
+}
+
+table th {
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 버튼 스타일 */
+.approve-button,
+.reject-button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.approve-button {
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.approve-button:hover {
+  background-color: #218838;
+}
+
+.reject-button {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.reject-button:hover {
+  background-color: #c82333;
+}
+
+/* 로딩 및 빈 상태 스타일 */
+.teacher-page p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555555;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .teacher-page {
+    padding: 15px;
+  }
+
+  table th,
+  table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .approve-button,
+  .reject-button {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}

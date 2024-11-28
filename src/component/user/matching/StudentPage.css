@@ -1,0 +1,81 @@
+/* 기본 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 0;
+}
+
+/* 컨테이너 스타일 */
+.student-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #ffffff, #e6f7ff);
+  padding: 20px;
+}
+
+/* 폼 스타일 */
+.student-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.student-form h2 {
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.student-form label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+  color: #555555;
+}
+
+.student-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px 0;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+.student-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.student-form button:hover {
+  background-color: #45a049;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .student-form {
+    padding: 20px;
+  }
+
+  .student-form select {
+    font-size: 14px;
+  }
+
+  .student-form button {
+    font-size: 14px;
+  }
+}
