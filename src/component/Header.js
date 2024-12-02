@@ -18,13 +18,15 @@ function Header() {
             try {
                 const decodedToken = jwtDecode(token);
                 console.log("Decoded Token:", decodedToken);
-                const id = decodedToken.id;
+                const userId = decodedToken.userId;
+                const sub = decodedToken.sub;
 
                 setUserId(id);
                 setIsLoggedIn(true);
                 setUserRoles(decodedToken.roles || []); // roles 배열 설정
 
-                console.log("User ID:", id);
+                console.log("User ID:", userId);
+                console.log("Long ID:", sub);
             } catch (error) {
                 console.error("JWT 디코딩 오류:", error);
                 setIsLoggedIn(false);

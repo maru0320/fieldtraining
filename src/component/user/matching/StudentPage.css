@@ -1,81 +1,40 @@
-/* 기본 스타일 */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
-  margin: 0;
-  padding: 0;
+/* src/StudentPage.css */
+
+/* 선생님 목록 스타일 */
+.teacher-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px 0;
 }
 
-/* 컨테이너 스타일 */
-.student-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #ffffff, #e6f7ff);
+.teacher-item {
+  background-color: #fff;
   padding: 20px;
-}
-
-/* 폼 스타일 */
-.student-form {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 100%;
-  max-width: 400px;
+  transition: transform 0.3s ease;
 }
 
-.student-form h2 {
-  margin-bottom: 20px;
-  color: #333333;
+.teacher-item:hover {
+  transform: translateY(-10px);
 }
 
-.student-form label {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  display: block;
-  color: #555555;
-}
-
-.student-form select {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  margin: 10px 0;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-}
-
-.student-form button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.teacher-item button {
   margin-top: 10px;
 }
 
-.student-form button:hover {
-  background-color: #45a049;
+.teacher-item p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 480px) {
-  .student-form {
-    padding: 20px;
-  }
-
-  .student-form select {
-    font-size: 14px;
-  }
-
-  .student-form button {
-    font-size: 14px;
-  }
+/* No teachers found message */
+.no-teachers {
+  font-size: 18px;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
 }

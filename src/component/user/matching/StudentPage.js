@@ -1,76 +1,72 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./StudentPage.css";
+import './StudentPage.css';
 
 const StudentPage = () => {
   const [teachers, setTeachers] = useState([]);
-  const [matchStatus, setMatchStatus] = useState(null);
-  const studentId = 3; // 기본 학생 ID
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const studentId = 3; // 학생 ID 고정
+  const navigate = useNavigate(); // navigate 훅 사용
 
   useEffect(() => {
-    // 매칭 상태 확인
-    axios
-      .get(`http://localhost:8090/matching/status/${studentId}`)
-      .then((response) => {
-        setMatchStatus(response.data.isMatched);
-      })
-      .catch((error) => console.error("Error fetching match status:", error));
-  }, [studentId]);
+    const fetchTeachers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8090/matching/teachers/${studentId}`);
+        setTeachers(response.data);
+      } catch (err) {
+        console.error("Error fetching teachers:", err);
+        setError("선생님 목록을 불러오는 데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
-    if (matchStatus === true) {
-      navigate("/MatchStatus");
-    }
-  }, [matchStatus, navigate]);
+    fetchTeachers();
+  }, []);
 
-  useEffect(() => {
-    // 선생님 목록 가져오기
-    axios
-      .get(`http://localhost:8090/matching/teachers?studentId=${studentId}`)
-      .then((response) => setTeachers(response.data))
-      .catch((error) => console.error("Error fetching teachers:", error));
-  }, [studentId]);
+  if (loading) {
+    return <p className="loading">상태를 불러오는 중...</p>;
+  }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const teacherId = event.target.teacher.value;
+  if (error) {
+    return <p>{error}</p>;
+  }
 
-    axios
-      .post("http://localhost:8090/matching/apply", {
-        studentId,
-        teacherId,
-      })
-      .then(() => {
-        alert("신청이 완료되었습니다.");
-        setMatchStatus(false);
-      })
-      .catch((error) => {
-        console.error("Error applying match:", error);
+  if (teachers.length === 0) {
+    return <p className="no-teachers">현재 매칭 가능한 선생님이 없습니다.</p>;
+  }
+
+  const applyMatch = async (teacherId) => {
+    try {
+      const response = await axios.post("http://localhost:8090/matching/apply", {
+        studentId,  // 학생 ID
+        teacherId   // 선택한 선생님 ID
       });
+
+      if (response.status === 200) {
+        alert("매칭 신청이 완료되었습니다.");
+        navigate("/match-status");  // 신청 후 매칭 상태 페이지로 이동
+      }
+    } catch (err) {
+      console.error("Error applying for match:", err);
+      alert("매칭 신청에 실패했습니다.");
+    }
   };
 
-  if (matchStatus === null) return <p>로딩 중...</p>;
-
-  return matchStatus === false ? (
-    <div className="student-container">
-      <h2>매칭 신청 중...</h2>
-    </div>
-  ) : (
-    <div className="student-container">
-      <form className="student-form" onSubmit={handleSubmit}>
-        <h2>선생님 신청하기</h2>
-        <label htmlFor="teacher">선생님 선택:</label>
-        <select id="teacher" name="teacher" required>
-          {teachers.map((teacher) => (
-            <option key={teacher.id} value={teacher.id}>
-              {teacher.name}
-            </option>
-          ))}
-        </select>
-        <button type="submit">신청하기</button>
-      </form>
+  return (
+    <div>
+      <h2>매칭 가능한 선생님 목록</h2>
+      <div className="teacher-list">
+        {teachers.map((teacher) => (
+          <div className="teacher-item" key={teacher.id}>
+            <p>{teacher.name}</p>
+            <button onClick={() => applyMatch(teacher.id)}>매칭 신청</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

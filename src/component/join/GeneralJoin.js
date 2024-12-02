@@ -137,11 +137,17 @@ function GeneralJoin() {
                 <div>
                     {partChoice()}
                 </div>
-                {/* 회원가입 버튼 */}
+
+
+            {/* 회원가입 버튼 */}
             <div>
                 <button className="submitButton" type="submit">회원가입</button>
             </div>
+
+
+
             </div>
+
         </form>
     );
 }

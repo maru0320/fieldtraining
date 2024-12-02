@@ -20,7 +20,7 @@ const Logo = () => (
     </svg>
 );
 
-function UploadBox() {
+function UploadBox({ onUpload, value }) {
     const [isActive, setActive] = useState(false);
     const [uploadedInfo, setUploadedInfo] = useState(null);
 
@@ -42,11 +42,17 @@ function UploadBox() {
 
         const file = event.dataTransfer.files[0];
         setFileInfo(file);
+        if (onUpload) {
+            onUpload(file);  // 부모 컴포넌트로 파일 전송
+        }
     };
 
     const handleUpload = ({ target }) => {
         const file = target.files[0];
         setFileInfo(file);
+        if (onUpload) {
+            onUpload(file);  // 부모 컴포넌트로 파일 전송
+        }
     };
 
     return (

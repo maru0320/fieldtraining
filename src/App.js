@@ -27,9 +27,11 @@ import ReferenceWrite from './component/manager/referenceboard/ReferenceWrite';
 import StudentPage from './component/user/matching/StudentPage';
 import TeacherPage from './component/user/matching/TeacherPage';
 import Footer from './component/Footer';
-import MatchStatus from './component/user/matching/MatchStatus';
+import MatchStatus from './component/user/matching/MatchStatusPage';
+import MatchStatusPage from './component/user/matching/MatchStatusPage';
 import PracticeUpdate from './component/user/practice/PracticeUpdate';
 import BoardDetail from './component/user/practice/BoardDetail';
+import './global.css';  // 공통 스타일 임포트
 
 function App() {
   const [postArray, setPostArray] = useState([]);
@@ -44,10 +46,11 @@ function App() {
          <Routes>
           <Route path="/StudentPage" element={<StudentPage />} /> 
           <Route path="/TeacherPage" element={<TeacherPage />} />
+          <Route path="/match-status" element={<MatchStatusPage />} />
           <Route path="/Practice" element={<Practice posts={postArray} />} /> 
-          <Route path="/PracticeWrite" element={<PracticeWrite postArray={postArray} />} /> 
-          <Route path="/BoardDetail" element={<BoardDetail postArray={postArray} />} /> 
-          <Route path="/PracticeUpdate" element={<PracticeUpdate postArray={postArray} />} /> 
+          <Route path="/PracticeWrite" element={<PracticeWrite postArray={postArray} setPostArray={setPostArray} />} /> 
+          <Route path="/PracticeUpdate" element={<PracticeUpdate />} />
+          <Route path="/BoardDetail" element={<BoardDetail />} />
           <Route path="/FaQBoard" element={<FaQBoard posts={postArray} />} /> 
           <Route path="/FaQWrite" element={<FaQWrite postArray={postArray} setPostArray={setPostArray} />} /> 
           <Route path="/FormBoard" element={<FormBoard posts={postArray} />} /> 
