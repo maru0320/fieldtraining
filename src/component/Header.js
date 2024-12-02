@@ -9,6 +9,7 @@ function Header() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRoles, setUserRoles] = useState([]);
+  const [id,setUserId] = useState([null]);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -17,8 +18,13 @@ function Header() {
             try {
                 const decodedToken = jwtDecode(token);
                 console.log("Decoded Token:", decodedToken);
+                const id = decodedToken.id;
+
+                setUserId(id);
                 setIsLoggedIn(true);
                 setUserRoles(decodedToken.roles || []); // roles 배열 설정
+
+                console.log("User ID:", id);
             } catch (error) {
                 console.error("JWT 디코딩 오류:", error);
                 setIsLoggedIn(false);
@@ -41,6 +47,7 @@ function Header() {
         window.removeEventListener("storage", handleStorageChange);
     };
 }, []);
+
 
 
 
