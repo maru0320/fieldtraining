@@ -23,7 +23,7 @@ function Login() {
         try {
             const response = await axios.post('http://localhost:8090/login', {
                 userId: userid,
-                password: password
+                password:password
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -31,10 +31,15 @@ function Login() {
             });
 
             const { token } = response.data;
-            localStorage.setItem('token', token);
+            if (token) {
+                localStorage.setItem('token', token); // 토큰을 localStorage에 저장
 
-            // useNavigate로 리다이렉트
-            navigate('/');
+                window.dispatchEvent(new Event('storage'));
+
+                navigate('/'); // 홈 화면으로 리다이렉트
+            } else {
+                setError("로그인 실패. 잠시 후 다시 시도해주세요.");
+            }
 
         } catch (err) {
             if (err.response && err.response.status === 401) {

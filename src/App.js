@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"; // 이 구문을 넣으면 됨
 import { useState } from 'react';
 import Attendance from './component/user/attendance/Attendance';
@@ -27,6 +27,7 @@ import ReferenceWrite from './component/manager/referenceboard/ReferenceWrite';
 import StudentPage from './component/user/matching/StudentPage';
 import TeacherPage from './component/user/matching/TeacherPage';
 import Footer from './component/Footer';
+import MatchStatus from './component/user/matching/MatchStatus';
 
 function App() {
   const [postArray, setPostArray] = useState([]);
@@ -64,6 +65,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/findid" element={<FindID/>} />
           <Route path="/findpassword" element={<FindPassword/>} />
+          <Route path="/MatchStatus" element={<MatchStatus />} />
         </Routes> 
         </div>
       </div>

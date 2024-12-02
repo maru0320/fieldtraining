@@ -12,7 +12,7 @@ body {
 }
 
 .wrapper {
-    height: 100vh;
+    height: 700px;
     border: 1px solid #AACDFF;
     box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
     border-radius: 20px;
@@ -20,7 +20,6 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 60px;
-    justify-content: center; /* 가로 중앙 정렬 */
 }
 .joinButton{
     width: 380px;

@@ -1,84 +1,93 @@
-import React, { useState } from "react";
-import SearchBar from "../../SearchBar";
-import Pagination from "../../Pagination";
-import "../../Board.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const Practice = ({posts}) => {
-    const navigate = useNavigate();
-    // 글쓰기 버튼 클릭 시 /write 경로로 이동
+import "./Practice.css"; 
+import Sidebar from "../../Sidebar";
+const Practice = () => {
+  const [boardList, setBoardList] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState(""); // 검색어
+  const navigate = useNavigate();
     const handleWriteClick = () => {
         navigate("/PracticeWrite");
     };
-
-    // 검색어 상태
-    const [searchTerm, setSearchTerm] = useState("");
-
-    // 검색된 게시물만 필터링
-    const filteredPosts = (posts || []).filter(post => 
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) // 대소문자 구분 없이 필터링
-    );
-    // 검색 처리 함수
-    const handleSearch = (searchTerm) => {
-        setSearchTerm(searchTerm); // 검색어 상태 설정
-        setCurrentPage(1); // 검색 후 첫 페이지로 리셋
+    const handleDetailClick = (boardID) => {
+      navigate("/BoardDetail", { state: { boardID } });
     };
+  // 게시판 목록 가져오기
+  const fetchBoardList = async () => {
+    try {
+      const response = await axios.get("http://localhost:8090/practice/list");
+      setBoardList(response.data);
+    } catch (error) {
+      console.error("게시판 목록 가져오기 실패:", error);
+    }
+  };
+  // 게시판 검색
+  const handleSearch = async () => {
+    try {
+      const response = await axios.post("http://localhost:8090/practice/search", {
+        keyword: searchKeyword,
+      });
+      setBoardList(response.data);
+    } catch (error) {
+      console.error("검색 실패:", error);
+    }
+  };
+  // 컴포넌트가 마운트되면 목록 가져오기 실행
+  useEffect(() => {
+    fetchBoardList();
+  }, []);
+  return (
+    <div>
+    <Sidebar />
+    
 
-    //페이지네이션
-
-    // 페이지 관련 상태 설정
-    const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 10;
-
-    // 총 페이지 수 계산
-    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-    const startIndex = (currentPage - 1) * postsPerPage;
-    const currentPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
-
-    return (
-        <div className="Board">
-            <div className="section">
-                <h2 className="title">공지사항</h2>
-            </div>
-            <div className="section board-content">
-                <table className="board-table">
-                    <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성일</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentPosts.length > 0 ? (
-                            currentPosts.map((post) => (
-                                <tr key={post.id}>
-                                    <td>{post.id}</td>
-                                    <td>{post.title}</td>
-                                    <td>{post.date}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="3">검색 결과가 없습니다.</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
-            <div className="section SearchAndPage">
-                <div className="SearchBar">
-                    <SearchBar onSearch={handleSearch} />
-                </div>
-                    <Pagination 
-                        currentPage={currentPage} 
-                        setCurrentPage={setCurrentPage} 
-                        totalPages={totalPages}  
-                    />
-                <button onClick={handleWriteClick}>글쓰기</button>
-            </div>
-        </div>
-    );
+    <div className="board-container">
+    
+      <h1 className="board-title">공지사항</h1>
+      <table className="board-table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+          </tr>
+        </thead>
+        <tbody>
+          {boardList.length === 0 ? (
+            <tr>
+              <td colSpan="3" className="no-data">
+                검색 결과가 없습니다.
+              </td>
+            </tr>
+          ) : (
+            boardList.map((board, index) => (
+              <tr key={board.id} onClick={() => handleDetailClick(board.boardID)}>
+                <td>{index + 1}</td>
+                <td>{board.title}</td>
+                <td>{board.trainingDate}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+      <div className="board-footer">
+        <input
+          type="text"
+          placeholder="검색..."
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          className="search-input"
+        />
+        <button onClick={handleWriteClick} className="search-button">
+          글쓰기
+        </button>
+        <button onClick={handleSearch} className="search-button">
+          검색
+        </button>
+      </div>
+    </div>
+    </div>
+  );
 };
-
 export default Practice;

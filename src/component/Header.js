@@ -1,10 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logoImage from '../img/logo.jpg';
 import './Header.css';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 function Header() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRoles, setUserRoles] = useState([]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                console.log("Decoded Token:", decodedToken);
+                setIsLoggedIn(true);
+                setUserRoles(decodedToken.roles || []); // roles 배열 설정
+            } catch (error) {
+                console.error("JWT 디코딩 오류:", error);
+                setIsLoggedIn(false);
+                setUserRoles([]);
+            }
+        } else {
+            setIsLoggedIn(false);
+            setUserRoles([]);
+        }
+    };
+
+    // 초기 상태 설정
+    handleStorageChange();
+
+    // storage 이벤트 리스너 등록
+    window.addEventListener("storage", handleStorageChange);
+
+    // 컴포넌트 언마운트 시 리스너 제거
+    return () => {
+        window.removeEventListener("storage", handleStorageChange);
+    };
+}, []);
+
+
+
 
   // 로그인 버튼 클릭 시
   const onClickLogin = () => {
@@ -15,6 +54,47 @@ function Header() {
   const onClickJoin = () => {
       navigate("/joinselect");
   };
+
+    const onClickLogout = async (event) => {
+    event.preventDefault();
+
+    try {
+        const response = await axios.post(
+            'http://localhost:8090/api/auth/logout',
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (response.status === 200) {
+            localStorage.removeItem('token');
+            alert('로그아웃 성공');
+            setIsLoggedIn(false);
+            setUserRoles([]);
+            navigate("/login");
+        } else {
+            alert('로그아웃 실패');
+        }
+    } catch (error) {
+        console.error('네트워크 오류:', error);
+        alert('로그아웃 중 오류가 발생했습니다.');
+    }
+};
+
+
+  const onClickMyActivity = () => {
+      navigate("/myactivity"); // "나의 활동" 페이지로 이동
+  };
+
+  const onClickAdminPage = () => {
+    navigate("/admin"); // 관리자 페이지로 이동
+};
+
+
 
   // 로고 클릭 시 메인 페이지로 이동
   const onClickLogo = () => {
@@ -74,9 +154,29 @@ function Header() {
         </ul>
       </nav>
       <div className="auth-buttons">
-        <button className="auth-button" onClick={onClickLogin}>로그인</button>
-        <button className="auth-button" onClick={onClickJoin}>회원가입</button>
-      </div>
+                {isLoggedIn && userRoles.length > 0 ? (
+                        userRoles.includes("STUDENT") || userRoles.includes("PROFESSOR") || userRoles.includes("TEACHER") ? (
+                            <>
+                                <button onClick={onClickMyActivity}>나의 활동</button>
+                                <button onClick={onClickLogout}>로그아웃</button>
+                            </>
+                        ) : userRoles.includes("STUDENT_MANAGER") || userRoles.includes("COLLEGE_MANAGER") ? (
+                            <>
+                                <button onClick={onClickAdminPage}>관리자 페이지</button>
+                                <button onClick={onClickLogout}>로그아웃</button>
+                            </>
+                        ) : (
+                            <div>권한 없음</div>
+                        )
+                    ) : (
+                        <>
+                            <button onClick={onClickLogin}>로그인</button>
+                            <button onClick={onClickJoin}>회원가입</button>
+                        </>
+                    )}
+
+            </div>
+
     </div>
   );
 }
