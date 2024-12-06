@@ -1,0 +1,24 @@
+.loginButtonContainer{
+    display: flex;
+    justify-content: space-between; /* 버튼들 사이에 간격 추가 */
+    gap: 10px; /* 버튼 간격 조절 */
+}
+
+.loginButton{
+    width: 130px;
+    height: 70px;
+    border: 5px solid #fff;
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 13px;
+}
+.loginWrapper {
+    height: 500px;
+    border: 1px solid #AACDFF;
+    box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
+    border-radius: 20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px;
+}
