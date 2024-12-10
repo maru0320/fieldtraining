@@ -1,0 +1,62 @@
+/* MyPage.css */
+.mypage-body {
+    display: inline-flex;
+  }
+  
+  .sidebar-container{
+    width: 250px;
+  }
+  
+  .mypage-container {
+      width: 1000px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-family: 'Arial', sans-serif;
+    }
+    
+    .mypage-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .user-info {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .user-info:last-child {
+      border-bottom: none;
+    }
+    
+    .user-info-label {
+      font-weight: bold;
+      color: #555;
+      display: inline-block;
+      width: 120px;
+    }
+    
+    .user-info-value {
+      color: #333;
+    }
+    
+    .role-section {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .role-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a90e2;
+      margin-bottom: 10px;
+    }
+    
