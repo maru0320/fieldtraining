@@ -1,0 +1,38 @@
+/* 캘린더 레이아웃 */
+.calendar-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  /* 캘린더 영역 */
+  .calendar-left {
+    flex: 3;
+    padding-right: 20px;
+  }
+  
+  /* 일정 리스트 영역 */
+  .calendar-right {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar-right h2 {
+    margin-bottom: 20px;
+  }
+  
+  .calendar-right ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .calendar-right li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
