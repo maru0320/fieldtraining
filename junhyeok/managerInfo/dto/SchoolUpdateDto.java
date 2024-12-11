@@ -12,7 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SchoolUpdateDto {
-	private String address; // 주소
+    private Long id;
+    private String address; // 주소
     private String officePhoneNumber; // 사무실 전화번호
     private String password; // 변경할 비밀번호
     private String schoolName; // 학교 이름
