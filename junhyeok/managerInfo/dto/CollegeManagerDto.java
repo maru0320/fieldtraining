@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CollegeManagerDto {
+	private Long id;
 	private String address;
 	private String officeNumber;
 	private String college;
