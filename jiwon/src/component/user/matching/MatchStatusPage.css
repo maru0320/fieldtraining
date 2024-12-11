@@ -1,0 +1,59 @@
+.mypage-body {
+  display: inline-flex;
+}
+
+.sidebar-container{
+  width: 250px;
+}
+
+/* 매칭 상태 카드 */
+.match-status-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 1000px;
+  margin: 50px auto;
+  transition: transform 0.3s ease;
+}
+
+.match-status-card:hover {
+  transform: translateY(-10px);
+}
+
+.match-status-card h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.match-status-card p {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/* 매칭 상태에 따른 색상 */
+.pending {
+  color: #ff7f00;
+}
+
+.approved {
+  color: #28a745;
+}
+
+.rejected {
+  color: #dc3545;
+}
+
+.error {
+  color: #c82333;
+}
+
+/* 로딩 상태 */
+.loading {
+  font-size: 18px;
+  color: #888;
+}

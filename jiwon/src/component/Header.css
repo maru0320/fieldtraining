@@ -1,0 +1,148 @@
+/* 전체 헤더 스타일 */
+.banner-header {
+  position: fixed; /* 헤더를 상단에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #002244; /* 다크 블루 */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px; /* 좀 더 여유로운 패딩 */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* 항상 위에 표시되도록 */
+}
+
+
+/* 로고 이미지 스타일 */
+.logo-image {
+  height: 60px; /* 살짝 더 큰 크기 */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.1); /* 호버 시 확대 */
+}
+
+/* 네비게이션 스타일 */
+.banner-nav {
+  display: flex;
+}
+
+.banner-nav-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 30px; /* 메뉴 간격 */
+}
+
+.banner-nav-item {
+  position: relative; /* 드롭다운 메뉴를 위해 */
+}
+
+/* 배너 텍스트 스타일 */
+.banner-text {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 8px 15px; /* 텍스트 주변 여백 */
+  border-radius: 5px; /* 부드러운 모서리 */
+}
+
+.banner-text:hover {
+  color: #ffcc00; /* 포인터 올렸을 때 노란색 */
+  background-color: #004080; /* 살짝 더 어두운 블루 */
+}
+
+/* 드롭다운 메뉴 */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px); /* 부모 아래 간격 */
+  left: 0;
+  background-color: #ffffff; /* 밝은 배경 */
+  color: #003366; /* 텍스트 색상 */
+  padding: 10px 0;
+  margin: 0;
+  list-style: none;
+  border-radius: 8px; /* 부드러운 모서리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 은은한 그림자 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px); /* 나타나기 전 살짝 위에 위치 */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  z-index: 200;
+}
+
+/* 드롭다운 메뉴가 보이는 상태 */
+.banner-nav-item:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 자연스럽게 아래로 내려옴 */
+}
+
+/* 드롭다운 메뉴 항목 스타일 */
+.dropdown-item {
+  padding: 12px 20px; /* 항목 내부 여백 */
+  font-size: 15px; /* 텍스트 크기 */
+  font-weight: 500; /* 약간 두껍게 */
+  color: #003366; /* 기본 텍스트 색상 */
+  white-space: nowrap; /* 긴 텍스트 줄바꿈 방지 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 드롭다운 항목 호버 효과 */
+.dropdown-item:hover {
+  background-color: #003366; /* 진한 배경 */
+  color: #ffffff; /* 밝은 텍스트 */
+  cursor: pointer;
+}
+
+/* 드롭다운 메뉴 간의 간격 */
+.dropdown-item + .dropdown-item {
+  margin-top: 5px; /* 항목 간의 간격 추가 */
+}
+
+
+/* 로그인/회원가입 버튼 스타일 */
+.auth-buttons button {
+  background-color: #ffcc00; /* 기본 노란색 */
+  color: #002244; /* 텍스트 색상 */
+  font-weight: bold;
+  border: none;
+  border-radius: 20px; /* 약간 더 둥근 모서리 */
+  padding: 10px 20px; /* 버튼 크기 확대 */
+  cursor: pointer;
+  margin-left: 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-buttons button:hover {
+  background-color: #ff9900; /* 호버 시 조금 더 어두운 노란색 */
+  transform: scale(1.1); /* 살짝 확대 */
+}
+
+.auth-buttons button:active {
+  transform: scale(0.95); /* 클릭 시 약간 축소 */
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .banner-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .banner-nav-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .auth-buttons {
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,14 @@
+.mypage-body {
+    display: inline-flex;
+}
+  
+.sidebar-container{
+    width: 250px;
+}
+  
+.studentAttendance-container {
+    width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
