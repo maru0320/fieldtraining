@@ -25,9 +25,9 @@ public class ManagerInfoController {
     	this.managerInfoService = managerInfoService;
     }
 
-    @GetMapping("/{role}/{userId}")
-    public ResponseEntity<?> getManagerInfo(@PathVariable String role, @PathVariable String userId) {
-        Object managerInfo = managerInfoService.getManagerInfo(userId, role);
+    @GetMapping("/college/{id}")
+    public ResponseEntity<?> getCollegeManagerInfo(@PathVariable Long id) {
+        Object managerInfo = managerInfoService.getManagerInfoById(id, "collegeManager");
 
         if (managerInfo != null) {
             return ResponseEntity.ok(managerInfo);
@@ -35,22 +35,35 @@ public class ManagerInfoController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+    @GetMapping("/school/{id}")
+    public ResponseEntity<?> getSchoolManagerInfo(@PathVariable Long id) {
+        Object managerInfo = managerInfoService.getManagerInfoById(id, "schoolManager");
+
+        if (managerInfo != null) {
+            return ResponseEntity.ok(managerInfo);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+
     
     // 학교 관리자 정보 업데이트
-    @PutMapping("/school/{userId}")
+    @PutMapping("/school/{id}")
     public ResponseEntity<String> updateSchoolManagerInfo(
-            @PathVariable String userId,
+            @PathVariable Long id,
             @RequestBody SchoolUpdateDto schoolUpdateDto) {
-        managerInfoService.updateSchoolManagerInfo(userId, schoolUpdateDto);
+        managerInfoService.updateSchoolManagerInfo(id, schoolUpdateDto);
         return ResponseEntity.ok("학교 관리자 정보가 업데이트되었습니다.");
     }
 
     // 대학 관리자 정보 업데이트
-    @PutMapping("/college/{userId}")
+    @PutMapping("/college/{id}")
     public ResponseEntity<String> updateCollegeManagerInfo(
-            @PathVariable String userId,
+            @PathVariable Long id,
             @RequestBody CollegeUpdateDto collegeUpdateDto) {
-        managerInfoService.updateCollegeManagerInfo(userId, collegeUpdateDto);
+        managerInfoService.updateCollegeManagerInfo(id, collegeUpdateDto);
         return ResponseEntity.ok("대학 관리자 정보가 업데이트되었습니다.");
     }
 }
