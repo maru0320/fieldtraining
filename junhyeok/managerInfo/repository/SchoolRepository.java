@@ -10,6 +10,4 @@ import com.fieldtraining.data.entity.SchoolManager;
 @Repository
 public interface SchoolRepository extends JpaRepository<SchoolManager, Long>{
 
-	Optional<SchoolManager> findByUser_UserId(String userId);
-
 }
