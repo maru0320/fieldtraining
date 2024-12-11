@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CollegeUpdateDto {
+	 private Long id;
 	 private String address; // 주소
 	 private String officePhoneNumber; // 사무실 전화번호
 	 private String password; // 변경할 비밀번호
