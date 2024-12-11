@@ -9,7 +9,5 @@ import com.fieldtraining.data.entity.CollegeManager;
 
 @Repository
 public interface CollegeRepository extends JpaRepository<CollegeManager, Long>{
-
-	Optional<CollegeManager> findByUser_UserId(String userId);
 	
 }
