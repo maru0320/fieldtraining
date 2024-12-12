@@ -1,0 +1,72 @@
+.mypage-body {
+  display: inline-flex;
+}
+
+.sidebar-container{
+  width: 250px;
+}
+
+/* 기본 스타일 */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+  
+  /* 페이지 제목 */
+  h1 {
+    text-align: center;
+    margin: 20px;
+    color: #333;
+  }
+  
+  /* 테이블 스타일 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f8f8f8;
+    color: #555;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+
+  /* 세부 정보 텍스트 스타일 */
+  p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px;
+    }
+  
+    button {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
+  

@@ -1,0 +1,53 @@
+.mypage-body {
+  display: inline-flex;
+}
+
+.sidebar-container{
+  width: 250px;
+}
+
+.studentmatching-container{
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* 선생님 목록 스타일 */
+.teacher-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.teacher-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.teacher-item:hover {
+  transform: translateY(-10px);
+}
+
+.teacher-item button {
+  margin-top: 10px;
+}
+
+.teacher-item p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* No teachers found message */
+.no-teachers {
+  font-size: 18px;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}

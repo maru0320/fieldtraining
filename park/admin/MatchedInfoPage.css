@@ -1,0 +1,29 @@
+.matched-info-container {
+    padding: 20px;
+  }
+  
+  .info-container {
+    display: flex; /* 가로로 배치 */
+    justify-content: space-between; /* 간격을 균등하게 배치 */
+    gap: 20px; /* 박스 간 간격 */
+  }
+  
+  .info-box {
+    width: 45%; /* 각 박스의 너비를 45%로 설정 */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .info-box h3 {
+    margin-top: 0;
+  }
+  
+  .info-box p {
+    margin: 8px 0;
+  }
+  
+  .info-box strong {
+    font-weight: bold;
+  }
+  
